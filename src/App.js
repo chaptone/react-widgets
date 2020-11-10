@@ -3,16 +3,28 @@ import Accordion from './ components/Accordion'
 
 const items = [
   {
-    title: 'wkjsdlfkdjs',
-    content: 'dsflkjdslfkdsflkdsjflkdsjfk'
+    title: 'Title 1',
+    content: `
+    A dog is a type of domesticated animal.
+    Known for its loyalty and faithfulness,
+    it can be found as a welcome guest in many households across the world.
+    `
   },
   {
-    title: 'sfd',
-    content: 'sdf123213wrdw'
+    title: 'Title 2',
+    content: `
+    A dog is a type of domesticated animal.
+    Known for its loyalty and faithfulness,
+    it can be found as a welcome guest in many households across the world.
+    `
   },
   {
-    title: 'sdfsfdsfd',
-    content: 'sdf123212321321312312313wrdw'
+    title: 'Title 3',
+    content: `
+    A dog is a type of domesticated animal.
+    Known for its loyalty and faithfulness,
+    it can be found as a welcome guest in many households across the world.
+    `
   }
 ]
 
