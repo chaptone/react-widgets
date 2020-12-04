@@ -3,8 +3,19 @@ import axios from 'axios'
 import { Collapse } from 'antd'
 
 const Convert = ({ language, text }) => {
-  console.log('🚀 ~ file: Convert.js ~ line 6 ~ Convert ~ language', language)
   const [translated, setTranslated] = useState('')
+  const [debouncedText, setDebouncedText] = useState('')
+
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      setDebouncedText(text)
+    }, 500)
+
+    return () => {
+      clearTimeout(timerId)
+    }
+  }, [text])
+
   useEffect(() => {
     const doTranslation = async () => {
       const { data } = await axios.post(
@@ -12,7 +23,7 @@ const Convert = ({ language, text }) => {
         {},
         {
           params: {
-            q: text,
+            q: debouncedText,
             target: language.value,
             key: process.env.REACT_APP_API_KEY,
           },
@@ -22,7 +33,7 @@ const Convert = ({ language, text }) => {
     }
 
     doTranslation()
-  }, [language, text])
+  }, [language, debouncedText])
 
   return <div>{translated}</div>
 }
