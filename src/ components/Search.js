@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Input, List, Layout, Skeleton } from 'antd';
-import axios from 'axios';
+import { Input, List, Layout, Skeleton } from 'antd'
+import axios from 'axios'
 
 const Search = () => {
   const [term, setTerm] = useState('programing')
@@ -8,7 +8,7 @@ const Search = () => {
   const [results, setResults] = useState([])
 
   useEffect(() => {
-    const timerId  = setTimeout(() => {
+    const timerId = setTimeout(() => {
       setDebouncedTerm(term)
     }, 1000)
     return () => {
@@ -24,8 +24,8 @@ const Search = () => {
           list: 'search',
           origin: '*',
           format: 'json',
-          srsearch: term,
-        }
+          srsearch: debouncedTerm,
+        },
       })
       setResults(data.query.search)
     }
@@ -38,20 +38,28 @@ const Search = () => {
 
   return (
     <Layout>
-      <Input.Search placeholder="input search text" onChange={e => setTerm(e.target.value)} onSearch={(value) => setTerm(value)} enterButton />
-      {results.length ?
-      <List
-        itemLayout="horizontal"
-        dataSource={results}
-        renderItem={item => (
-          <List.Item>
-            <List.Item.Meta
-              title={<a href={`https://en.wikipedia.org?curid=${item.pageid}`}>{item.title}</a>}
-              description={replacingString(item.snippet)}
-            />
-          </List.Item>
-        )}
-      /> : <Skeleton/>}
+      <Input.Search
+        placeholder="input search text"
+        onChange={(e) => setTerm(e.target.value)}
+        onSearch={(value) => setTerm(value)}
+        enterButton
+      />
+      {results.length ? (
+        <List
+          itemLayout="horizontal"
+          dataSource={results}
+          renderItem={(item) => (
+            <List.Item>
+              <List.Item.Meta
+                title={<a href={`https://en.wikipedia.org?curid=${item.pageid}`}>{item.title}</a>}
+                description={replacingString(item.snippet)}
+              />
+            </List.Item>
+          )}
+        />
+      ) : (
+        <Skeleton />
+      )}
     </Layout>
   )
 }
