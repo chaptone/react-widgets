@@ -13,7 +13,7 @@ const Route = ({ path, children }) => {
       window.removeEventListener('popstate', onLocationChange)
     }
   }, [])
-  return window.location.pathname === path ? children : null
+  return currentPath === path ? children : null
 }
 
 export default Route
